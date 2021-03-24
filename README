@@ -1,0 +1,69 @@
+
+Stroescu Tudor Stefan - Tema 3 Iocla
+
+Implementare:
+	- am implementat o functie iterativa care construieste arborele de expresie.
+	- parcurgem expresia de la dreapta spre stanga( am creat un vector de cu-
+		vinte), pentru fiecare operand cream un nod cu valoarea lui pe care il
+		vom adauga in stiva. Cand intalnim un operator cream un nod cu valoarea lui
+		si scoatem 2 noduri de pe stiva. Mai departe nod->left = primul_nod de pe
+		stiva la care am dat pop, nod->right = al_doilea_nod de pe stiva la care
+		am dat pop.
+	- la final pe stiva va ramane doar nodul radacina.
+
+Functii utilizate:
+	- check_operand (primeste un sir si verifica daca e operand sau operator).
+	- create_vector (primeste expresia prefixata si construieste un vector de
+		cuvinte utilizand strtok).
+	- allocate_string (primeste un string si realizeaza un deepcopy).
+	- create_tree functia principala
+	- iocla_atoi (primeste un numar drept string si il converteste la int)
+
+
+Functia iocla_atoi:
+	- verificam daca primul caracter e -.
+		- in caz afirmativ vom retine intr-un registru valoarea -1(edx)
+		- altfel in edx vom retine 1
+	- parcurgem sirul caracter cu caracter si construim numarul dupa formula
+		numar = numar * 10 + caracter - 48.
+	- la final inumltim numarul obtinut cu valoarea retinuta in edx, astfel in-
+		cat daca numarul e pozitiv, inmultindu-l cu 1 nu-i va schimba valoarea.
+		Daca numarul e negativ atunci inmultind numarul cu -1 va rezulta un nu-
+		mar negativ.
+
+
+Functia check_operand:
+	- daca dimensiunea sirului e > 1 atunci este cu siguranta un operand
+	- altfel daca dimensiunea sirului = 1 si caracterul respectiv >= 48, atunci
+		este cu siguranta operand( o cifra).
+	- daca dimensiunea este 1 si caracterul nu apartine intervalului [48, 57]
+		avem un operand.
+
+
+Functia allocate_string:
+	- alocam cu malloc un numar de strlen(sir_input) + 1 octeti.
+	- copiem continutul sirului dat ca parametru in sirul nou alocat
+
+
+Functia create_vector:
+	- apelam functia strtok cu ajutorul careia vom extrage cuvintele(sirurile)
+		separate prin spatiu.
+	- vom pune pe stiva sirurile
+	- cat timp stiva mai are siruri vom da pop si vom adauga in vectorul de
+		siruri.
+	- sirurile in vectorul de siruri vor fi in ordine inversa, ordinii initiale
+		din sirul pe care se aplica strtok.
+
+
+Functia create_tree:
+	- este functia care construieste arborele de expresie
+	- vom lua fiecare sir din vectorul de siruri. 
+	- cand intalnim un operator cream un nod cu valoarea lui si popam 2 noduri 
+		de pe stiva. Mai departe nod->left = primul_nod de pe stiva la care am
+		dat pop, nod->right = al_doilea_nod de pe stiva la care am dat pop.
+	- la final pe stiva va ramane doar nodul radacina.
+	- dam pop in eax la nodul radacina aflat pe stiva.
+
+
+
+
